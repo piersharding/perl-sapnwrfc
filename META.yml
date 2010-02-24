@@ -1,0 +1,16 @@
+name:         sapnwrfc
+abstract:     SAP NW RFC for Perl
+author:       Piers Harding <piers@cpan.org>
+license:      Perl
+version:      0.31
+resources:
+  license: http://dev.perl.org/licenses/
+  homepage: http://www.piersharding.com/blog/
+version_from: sapnwrfc.pm
+installdirs:  site
+requires:
+   perl: 5.008
+   YAML: 0
+   Test::More: 0
+distribution_type: module
+generated_by: ME

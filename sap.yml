@@ -1,0 +1,9 @@
+ashost: /H/gecko.local.net
+sysnr: "01"
+client: "001"
+user: developer
+passwd: developer
+lcheck: 1
+lang: EN
+trace: 0
+debug: 0

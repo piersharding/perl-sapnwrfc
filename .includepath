@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includepath>
+  <includepathentry path="${resource_loc:/Perl sapnwrfc/lib}" />
+  <includepathentry path="${resource_loc:/Perl sapnwrfc/blib/lib}" />
+  <includepathentry path="${resource_loc:/Perl sapnwrfc/blib/arch}" />
+</includepath>
+
