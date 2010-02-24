@@ -1,7 +1,7 @@
 package SAPNW::RFC::FunctionCall;
 =pod
 
-    Copyright (c) 2006 - 2009 Piers Harding.
+    Copyright (c) 2006 - 2010 Piers Harding.
     All rights reserved.
 
 =cut

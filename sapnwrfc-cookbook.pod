@@ -400,7 +400,7 @@ Piers Harding E<lt>piers@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2006 - 2009 Piers Harding.
+Copyright (c) 2006 - 2010 Piers Harding.
 All rights reserved.
 
 L<http://www.piersharding.com>
