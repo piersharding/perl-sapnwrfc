@@ -120,7 +120,7 @@ https://www.sdn.sap.com/irj/scn/weblogs?blog=/pub/wlg/1452 for help.
 B<Connecting via saprouter>
 
 To connect via saprouter, this is achieved in by constructing the appropriate
-routing string, and using this in place of the L<ashost> parameter eg:
+routing string, and using this in place of the ashost parameter eg:
 
   ashost: /H/my.saprouter.net/H/gecko.local.net/
 
