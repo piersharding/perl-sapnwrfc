@@ -45,5 +45,5 @@ echo "Done."
 chmod -R a+r $BALL $ZIP
 
 echo "Copy up distribution"
-scp $BALL ompka.net:www/download/
-scp $ZIP ompka.net:www/download/
+scp $BALL piersharding.com:www/download/
+scp $ZIP piersharding.com:www/download/
