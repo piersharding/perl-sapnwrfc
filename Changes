@@ -33,3 +33,5 @@ Mon Jun 22 16:51:14 NZST 2009
 Thu Sep 10 07:47:40 NZST 2009
    * bumped the version and removed the dependency on 5.010
 
+Sat Aug 13 05:23:27 NZST 2011
+   * fixed broken link (wrong format) in cookbook

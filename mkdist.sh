@@ -5,7 +5,7 @@ find . -name '*.log' -type f -exec echo \> {} \;
 find . -name 'rfc*trc' -type f -exec rm -f {} \;
 find . -name '*~' -type f -exec rm -f {} \;
 
-VERS=0.31
+VERS=0.32
 DIST=sapnwrfc-$VERS
 BALL=$DIST.tar.gz
 ZIP=$DIST.zip
