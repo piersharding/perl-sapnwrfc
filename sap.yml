@@ -1,5 +1,5 @@
-ashost: /H/gecko.local.net
-sysnr: "01"
+ashost: /H/nplhost
+sysnr: "42"
 client: "001"
 user: developer
 passwd: developer
