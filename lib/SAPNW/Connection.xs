@@ -87,11 +87,11 @@ void set_table_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, SV* sv_value);
 static void * make_space(int len){
 
     char * ptr;
-    ptr = malloc( len + 1 );
+    ptr = malloc( len + 2 );
     if ( ptr == NULL ) {
         return NULL;
     }
-    memset(ptr, 0, len + 1);
+    memset(ptr, 0, len + 2);
     return ptr;
 }
 
@@ -176,7 +176,7 @@ SV * u16to8c(SAP_UC * str, int len) {
     char * utf8;
     SV * perl_str;
 
-    utf8Size = len * 2;
+    utf8Size = len * 4;
     utf8 = malloc(utf8Size + 2);
     memset(utf8, 0, utf8Size + 2);
 
@@ -201,7 +201,7 @@ SV * u16to8(SAP_UC * str) {
     char * utf8;
     SV * perl_str;
 
-    utf8Size = strlenU(str) * 2;
+    utf8Size = strlenU(str) * 4;
     utf8 = malloc(utf8Size + 2);
     memset(utf8, 0, utf8Size + 2);
 
@@ -1303,7 +1303,7 @@ SV * get_string_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name){
         return newSV(0);
     }
 
-    buffer = make_space(strLen*2 + 2);
+    buffer = make_space(strLen*4);
     rc = RfcGetString(hcont, name, (SAP_UC *)buffer, strLen + 2, &retStrLen, &errorInfo);
     if (rc != RFC_OK) {
         croak("Problem with RfcGetString (%s): %d / %s / %s\n",
@@ -1365,7 +1365,7 @@ SV * get_num_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, unsigned ulen){
     char * buffer;
     SV* sv_val;
 
-    buffer = make_space(ulen*2+1); /* seems that you need 2 null bytes to terminate a string ...*/
+    buffer = make_space(ulen*2); /* seems that you need 2 null bytes to terminate a string ...*/
     rc = RfcGetNum(hcont, name, (RFC_NUM *)buffer, ulen, &errorInfo);
     if (rc != RFC_OK) {
         croak("Problem with RfcGetNum (%s): %d / %s / %s\n",
@@ -1413,7 +1413,7 @@ SV * get_char_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, unsigned ulen){
     RFC_ERROR_INFO errorInfo;
     char * buffer;
     SV* sv_val;
-    buffer = make_space(ulen*2+1); /* seems that you need 2 null bytes to terminate a string ...*/
+    buffer = make_space(ulen*4); /* seems that you need 2 null bytes to terminate a string ...*/
     rc = RfcGetChars(hcont, name, (RFC_CHAR *)buffer, ulen, &errorInfo);
     if (rc != RFC_OK) {
         croak("Problem with RfcGetChars (%s): %d / %s / %s\n",
