@@ -200,7 +200,7 @@ sub MY::constants {
 sub MY::c_o {
   my $self = shift; 
   my $section = $self->MM::c_o;
-  if ($^O !~ /MSWin32/i){
+  if ($^O !~ /(MSWin32|hpux)/i){
     $section =~ s/(\$\*\.i)/$1i\n\t\$\(FULLPERL\) ..\/..\/tools\/u16lit\.pl \-le \$\(BASEEXT\)\.ii/s;
 		#.c$(OBJ_EXT):
 		#        $(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
@@ -221,7 +221,7 @@ sub MY::dynamic_lib {
 	  $section .= "\tmt.exe -outputresource:Connection.dll;2 -manifest Connection.dll.manifest\n";
 	  $section .= "\tcd ..\\..\\..\\..\\..\\lib\\SAPNW\n";
 	}
-  if ($^O !~ /MSWin32/i){
+  if ($^O !~ /(MSWin32|hpux)/i){
 	  $section =~ s/(\$\(INST_DYNAMIC\)\: )/$1\$\(BASEEXT\)\.i /s;
 	#  print STDERR "dynamic_lib: $section\n";
 	}
