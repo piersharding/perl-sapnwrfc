@@ -122,6 +122,16 @@ https://service.sap.com/sap/support/notes/1056696  - compiling help
 Please email directly if you have problems, and are willing to help 
 with testing (especially for other platforms) => piers@cpan.org.
 
+HP-UX
+-------
+sapnwrfc has been successfully tested under HP-UX 64bit architecture.
+
+Make sure that LD_LIBRARY_PATH is set to include the lib directory
+of your NW RFC SDK and run "perl Makefile.PL  –addlibs='-lCsup'"
+
+You must make sure that you are pointing the the 64 bit Perl - most likely
+in /opt/perl_64 and that the sym link for /opt/perl points to this too.
+
 
 Cheers - Piers Harding - R/2 R/3 BASIS, IFACE, JAPH, whatever ...
 

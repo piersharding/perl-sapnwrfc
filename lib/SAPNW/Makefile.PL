@@ -33,6 +33,22 @@ if($^O eq 'MSWin32') {
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
   $ADD_FLAGS .= " -DSAPonNT ";
   $ADD_FLAGS .= " -DSAP_PLATFORM_MAKENAME=ntintel ";
+} elsif($^O eq 'aix') {
+  $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
+  $ADD_FLAGS .= " -DSAPwithUNICODE ";
+  $ADD_FLAGS .= " -DSAPonUNIX ";
+  $ADD_FLAGS .= " -D__NO_MATH_INLINES ";
+  $ADD_FLAGS .= " -DSAPwithTHREADS ";
+  $ADD_FLAGS .= " -DNDEBUG ";
+  $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber ';
+} elsif($^O eq 'solaris') {
+  $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
+  $ADD_FLAGS .= " -DSAPwithUNICODE ";
+  $ADD_FLAGS .= " -DSAPonUNIX ";
+  $ADD_FLAGS .= " -D__NO_MATH_INLINES ";
+  $ADD_FLAGS .= " -DSAPwithTHREADS ";
+  $ADD_FLAGS .= " -DNDEBUG ";
+  $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber ';
 } elsif($^O eq 'hpux') {
   $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
@@ -208,7 +224,7 @@ sub MY::constants {
 sub MY::c_o {
   my $self = shift; 
   my $section = $self->MM::c_o;
-  if ($^O !~ /(MSWin32|hpux)/i){
+  if ($^O !~ /(MSWin32|hpux|aix|solaris)/i){
     $section =~ s/(\$\*\.i)/$1i\n\t\$\(FULLPERL\) ..\/..\/tools\/u16lit\.pl \-le \$\(BASEEXT\)\.ii/s;
 		#.c$(OBJ_EXT):
 		#        $(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
