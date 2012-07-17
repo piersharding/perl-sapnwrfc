@@ -37,7 +37,7 @@ if($^O eq 'MSWin32') {
   $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
   $ADD_FLAGS .= " -DSAPonUNIX ";
-  $ADD_FLAGS .= " -D__NO_MATH_INLINES ";
+  $ADD_FLAGS .= " -D_AIX51 -D_LARGE_FILES -U__unix -q64 -qtbtable=full -qhalt=e -qalias=noansi -qfdpr -O -qstrict -qlibansi -qinlglue -qmaxmem=8192 -qarch=ppc -qtune=pwr5 -qspill=2560 -DSAPonRS6000 -D__NO_XLC_BUILTIN_VA ";
   $ADD_FLAGS .= " -DSAPwithTHREADS ";
   $ADD_FLAGS .= " -DNDEBUG ";
   $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber ';
@@ -45,7 +45,7 @@ if($^O eq 'MSWin32') {
   $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
   $ADD_FLAGS .= " -DSAPonUNIX ";
-  $ADD_FLAGS .= " -D__NO_MATH_INLINES ";
+  $ADD_FLAGS .= " -DSAPonSUN -D__EXTENSIONS__ -D__XPG4_CHAR_CLASS__ -D_POSIX_PTHREAD_SEMANTICS -xtarget=ultra -xarch=v9 -xchar=unsigned -xustr=ascii_utf16_ushort -w -xO3 -xcode=pic32 -mt -norunpath -R -z rescan ";
   $ADD_FLAGS .= " -DSAPwithTHREADS ";
   $ADD_FLAGS .= " -DNDEBUG ";
   $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber ';
@@ -224,7 +224,7 @@ sub MY::constants {
 sub MY::c_o {
   my $self = shift; 
   my $section = $self->MM::c_o;
-  if ($^O !~ /(MSWin32|hpux|aix|solaris)/i){
+  if ($^O !~ /(MSWin32|hpux|solaris)/i){
     $section =~ s/(\$\*\.i)/$1i\n\t\$\(FULLPERL\) ..\/..\/tools\/u16lit\.pl \-le \$\(BASEEXT\)\.ii/s;
 		#.c$(OBJ_EXT):
 		#        $(CCCMD) $(CCCDLFLAGS) "-I$(PERL_INC)" $(PASTHRU_DEFINE) $(DEFINE) $*.c
@@ -245,7 +245,7 @@ sub MY::dynamic_lib {
 	  $section .= "\tmt.exe -outputresource:Connection.dll;2 -manifest Connection.dll.manifest\n";
 	  $section .= "\tcd ..\\..\\..\\..\\..\\lib\\SAPNW\n";
 	}
-  if ($^O !~ /(MSWin32|hpux)/i){
+  if ($^O !~ /(MSWin32|hpux|solaris)/i){
 	  $section =~ s/(\$\(INST_DYNAMIC\)\: )/$1\$\(BASEEXT\)\.i /s;
 	#  print STDERR "dynamic_lib: $section\n";
 	}
