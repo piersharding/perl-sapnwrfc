@@ -14,6 +14,10 @@ $VERSION = '0.34';
 use SAPNW::Base;
 $SAPNW::Base::DEBUG = 0;
 
+if ($^O eq 'solaris') {
+    $ENV{'RSCP_CATCH_INFO'} = '0';
+}
+
 use SAPNW::Rfc;
 use SAPNW::Connection;
 use SAPNW::RFC::FunctionDescriptor;

@@ -45,7 +45,7 @@ if($^O eq 'MSWin32') {
   $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
   $ADD_FLAGS .= " -DSAPonUNIX ";
-  $ADD_FLAGS .= " -DSAPonSUN -D__EXTENSIONS__ -D__XPG4_CHAR_CLASS__ -D_POSIX_PTHREAD_SEMANTICS -xtarget=ultra -xarch=v9 -xchar=unsigned -xustr=ascii_utf16_ushort -w -xO3 -xcode=pic32 -mt -norunpath -R -z rescan ";
+  $ADD_FLAGS .= " -DSAPonSUN -D__EXTENSIONS__ -D__XPG4_CHAR_CLASS__ -D_POSIX_PTHREAD_SEMANTICS -xchar=unsigned -xustr=ascii_utf16_ushort -w -xO3 -xcode=pic32 -mt -norunpath -R -z rescan ";
   $ADD_FLAGS .= " -DSAPwithTHREADS ";
   $ADD_FLAGS .= " -DNDEBUG ";
   $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber ';
