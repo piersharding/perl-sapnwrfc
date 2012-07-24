@@ -15,7 +15,7 @@ use SAPNW::Base;
 $SAPNW::Base::DEBUG = 0;
 
 if ($^O eq 'solaris') {
-    $ENV{'RSCP_CATCH_INFO'} = '0';
+    $ENV{'RSCP_CATCH_INIT'} = '0';
 }
 
 use SAPNW::Rfc;
