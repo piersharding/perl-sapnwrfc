@@ -56,7 +56,7 @@ if($^O eq 'MSWin32') {
   $ADD_FLAGS .= " -D__NO_MATH_INLINES ";
   $ADD_FLAGS .= " -DSAPwithTHREADS ";
   $ADD_FLAGS .= " -DSAPonHPIA64 +DD64 +DSitanium2 -Aa +Olibmerrno +Oinitcheck +We281 +W392,829,818,887 -mt -w +O2 +Onolimit +Oprocelim -DNDEBUG ";
-  $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber -lCsup ';
+  $ADDITIONAL_LIBS = '-lm -ldl -lrt -lnsl -lpthread -licudecnumber -lCsup -lunwind ';
 } else {
   $ADD_FLAGS  = $Config{ccflags} . ' ' . $Config{ccflags_uselargefiles};
   $ADD_FLAGS .= " -DSAPwithUNICODE ";
