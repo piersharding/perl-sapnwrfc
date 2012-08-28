@@ -1854,11 +1854,11 @@ void set_char_value(DATA_CONTAINER_HANDLE hcont, SAP_UC *name, SV* sv_value, uns
     if(SvTYPE(sv_value) != SVt_PV && SvTYPE(sv_value) != SVt_PVMG) {
         croak("RfcSetChar (%s): not a Scalar\n", sv_pv(u16to8(name)));
     }
-    if (SvCUR(sv_value) > max) {
-        croak("RfcSetChar string too long (%s): %s\n", sv_pv(u16to8(name)), sv_pv(sv_value));
-    }
 
     p_value = u8to16(sv_value);
+    if (strlenU(p_value) > max) {
+        croak("RfcSetChar string too long (%s): %s\n", sv_pv(u16to8(name)), sv_pv(sv_value));
+    }
     rc = RfcSetChars(hcont, name, p_value, strlenU(p_value), &errorInfo);
 //    fprintfU(stderr, cU("set %s value max(%d) len(%d): %s - rc: %d\n"), name, max, strlenU(p_value), p_value, rc);
     free(p_value);
