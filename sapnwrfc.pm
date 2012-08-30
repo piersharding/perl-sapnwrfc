@@ -9,7 +9,7 @@ use 5.008;
 =cut
 
 use vars qw($VERSION $AUTOLOAD $DEBUG);
-$VERSION = '0.35';
+$VERSION = '0.36';
 
 use SAPNW::Base;
 $SAPNW::Base::DEBUG = 0;

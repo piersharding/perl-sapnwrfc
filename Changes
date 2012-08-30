@@ -44,3 +44,7 @@ Wed Jul 25 09:47:09 NZST 2012
 
 Sat Aug 18 08:52:28 NZST 2012
    * more hpux build fixes supplied by stefan
+
+Fri Aug 31 05:42:19 NZST 2012
+   * Fix string length detection - thanks Helmut Schröder
+
