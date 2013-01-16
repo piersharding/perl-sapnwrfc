@@ -14,7 +14,7 @@ use Data::Dumper;
 require 5.008;
 
 use vars qw(@ISA $VERSION $SAPNW_RFC_CONFIG);
-$VERSION = '0.36';
+$VERSION = '0.37';
 @ISA = qw(SAPNW::Base);
 
 use YAML;

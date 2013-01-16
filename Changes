@@ -48,3 +48,6 @@ Sat Aug 18 08:52:28 NZST 2012
 Fri Aug 31 05:42:19 NZST 2012
    * Fix string length detection - thanks Helmut Schröder
 
+Wed Jan 16 13:06:17 EST 2013
+   * Fix dualvar anomalies - thanks Sven Dowideit
+

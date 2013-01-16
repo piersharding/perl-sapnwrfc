@@ -19,7 +19,7 @@ package SAPNW::Connection;
 
 
   use vars qw(@ISA $VERSION $DEBUG $SAPNW_RFC_CONFIG);
-  $VERSION = '0.36';
+  $VERSION = '0.37';
   @ISA = qw(DynaLoader Exporter); 
 
   sub dl_load_flags { $^O =~ /hpux|aix/ ? 0x00 : 0x01 }
