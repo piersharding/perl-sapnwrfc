@@ -1,7 +1,7 @@
 package SAPNW::RFC::FunctionCall;
 =pod
 
-    Copyright (c) 2006 - 2010 Piers Harding.
+    Copyright (c) 2006 - 2014 Piers Harding.
     All rights reserved.
 
 =cut
@@ -100,8 +100,9 @@ sub new {
     }
 
     sub invoke {
-      my $self = shift;
-        return SAPNW::Connection::invoke($self);
+        my $self = shift;
+        my $return_array = (scalar @_ ? shift : undef);
+        return SAPNW::Connection::invoke($self, $return_array);
   }
 
 

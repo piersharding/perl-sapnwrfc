@@ -1,7 +1,7 @@
 package SAPNW::RFC::Parameter;
 =pod
 
-    Copyright (c) 2006 - 2010 Piers Harding.
+    Copyright (c) 2006 - 2014 Piers Harding.
     All rights reserved.
 
 =cut
@@ -27,7 +27,7 @@ $VERSION = '0.37';
                   delete($first->{$key});
                 }
             }
-          ($name, $type, $len, $ulen, $decimals, $direction, $typedef) = 
+          ($name, $type, $len, $ulen, $decimals, $direction, $typedef) =
             ($first->{name},
              $first->{type},
              $first->{len},
@@ -44,7 +44,7 @@ $VERSION = '0.37';
         $len ||= 0;
         $decimals ||= 0;
         $ulen ||= 2*$len;
-        die "Invalid type ($type) for Parameter $name\n" unless 
+        die "Invalid type ($type) for Parameter $name\n" unless
                 $type == RFCTYPE_CHAR ||
                 $type == RFCTYPE_DATE ||
                 $type == RFCTYPE_BCD ||
@@ -89,7 +89,7 @@ $VERSION = '0.37';
       #print STDERR "DESTROY Parameter\n";
     }
 
-  sub name { 
+  sub name {
       my $self = shift;
         return $self->{name};
     }
@@ -100,27 +100,27 @@ $VERSION = '0.37';
         return $self->{value};
     }
 
-  sub type { 
+  sub type {
       my $self = shift;
         return $self->{type};
     }
 
-  sub len { 
+  sub len {
       my $self = shift;
         return $self->{len};
     }
 
-  sub ulen { 
+  sub ulen {
       my $self = shift;
         return $self->{ulen};
     }
 
-  sub decimals { 
+  sub decimals {
       my $self = shift;
         return $self->{decimals};
     }
 
-  sub direction { 
+  sub direction {
       my $self = shift;
         return $self->{direction};
     }
@@ -191,7 +191,7 @@ use SAPNW::Base;
         die "Missing Type type ($self->{name}) \n" unless exists $self->{type};
         $self->{ulen} ||= 2*$self->{len};
         my $type = $self->{type};
-        die "Invalid type ($type) for Type $self->{name}\n" unless 
+        die "Invalid type ($type) for Type $self->{name}\n" unless
         $type == RFCTYPE_CHAR ||
         $type == RFCTYPE_DATE ||
         $type == RFCTYPE_BCD ||
@@ -237,17 +237,17 @@ use SAPNW::Base;
     return $self;
     }
 
-  sub name { 
+  sub name {
       my $self = shift;
         return $self->{name};
     }
 
-  sub type { 
+  sub type {
       my $self = shift;
         return $self->{type};
     }
 
-  sub typedef { 
+  sub typedef {
       my $self = shift;
         if (exists($self->{typedef})) {
           return $self->{typedef};
@@ -256,17 +256,17 @@ use SAPNW::Base;
         }
     }
 
-  sub len { 
+  sub len {
       my $self = shift;
         return $self->{len};
     }
 
-  sub ulen { 
+  sub ulen {
       my $self = shift;
         return $self->{ulen};
     }
 
-  sub decimals { 
+  sub decimals {
       my $self = shift;
         return $self->{decimals};
     }

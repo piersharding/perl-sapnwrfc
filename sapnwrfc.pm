@@ -3,7 +3,7 @@ use strict;
 use 5.008;
 =pod
 
-    Copyright (c) 2006 - 2010 Piers Harding.
+    Copyright (c) 2006 - 2014 Piers Harding.
     All rights reserved.
 
 =cut
@@ -127,6 +127,8 @@ Many thanks to:
 =item * Ulrich Schmidt - for tireless help in development
 
 =item * Olivier Boudry - the build and test meister
+
+=item * DJ Adams - for everything
 
 =back
 

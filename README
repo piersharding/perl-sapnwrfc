@@ -2,7 +2,7 @@
                sapnwrfc - SAP Netweaver RFC support for Perl
 
 
-    Copyright (c) 2006 - 2010 Piers Harding.
+    Copyright (c) 2006 - 2014 Piers Harding.
     All rights reserved.
     This program is free software; you can redistribute it and/or modify
     it under the terms of either:
@@ -50,8 +50,8 @@
 
     One last thing - The SAP NW RFC SDK is a prerequisite for this perl package
     to work.  The NW RFC SDK is proprietary software owned by SAP AG.  For this
-    reason I will not supply ANY component part of the RFCSDK with this perl 
-    package, and further more you must obtain it through the normal channels 
+    reason I will not supply ANY component part of the RFCSDK with this perl
+    package, and further more you must obtain it through the normal channels
     with SAP AG - ie. you must have a licensed SAP R/3 installation at your
     disposal.
 
@@ -76,13 +76,13 @@ Help on the build process is available by doing:
 
 and it says:
 
-The whole trouble with the build process is one 
+The whole trouble with the build process is one
 of determining what your OS is, and which RFC
-library needs to be linked in, and where that 
+library needs to be linked in, and where that
 library lives.
 
 To help with this there are two command line
-options that you can use to point me in the 
+options that you can use to point me in the
 right direction:
 
 (1) --source /usr/sap/rfcsdk
@@ -98,7 +98,7 @@ right direction:
   that you would put in LDFLAGS.
   By default this is ' -lm -ldl -lpthread '
 
-YOU MUST MAKE SURE THAT YOU ADD THE LIB PATH TO LD_LIBRARY_PATH 
+YOU MUST MAKE SURE THAT YOU ADD THE LIB PATH TO LD_LIBRARY_PATH
 EG:
 export LD_LIBRARY_PATH=/usr/sap/rfcsdk/lib
 
@@ -109,17 +109,17 @@ perl Makefile.PL --source /opt/rfcsdk --addlibs '-lsomethingwacky'
 My personal build script contains:
 perl Makefile.PL --source=/home/piers/code/sap/nwrfcsdk
 
-where the SAR file for the NW RFC SDK has been unpacked into 
+where the SAR file for the NW RFC SDK has been unpacked into
 /home/piers/code/sap.
 
-Help on obtaining the NW RFC SDK can be found in the OSS notes 
+Help on obtaining the NW RFC SDK can be found in the OSS notes
 on http://service.sap.com/support.
 
 Ulrich updates the notes:
 https://service.sap.com/sap/support/notes/1025361  - availability
 https://service.sap.com/sap/support/notes/1056696  - compiling help
 
-Please email directly if you have problems, and are willing to help 
+Please email directly if you have problems, and are willing to help
 with testing (especially for other platforms) => piers@cpan.org.
 
 HP-UX

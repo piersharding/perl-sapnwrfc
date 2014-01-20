@@ -169,6 +169,7 @@ print <<INFO;
 BUILD INFORMATION
 ================================================
 
+OS:                  $^O
 source opt:          $opt_source
 addlibs opt:         $opt_addlibs
 embed_manifest opt:  $opt_embed_manifest

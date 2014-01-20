@@ -71,6 +71,8 @@ typedef struct SAPNW_FUNC_rec {
 
 HV* hv_global_server_functions;
 
+// boolean flag for array returns
+bool flag_global_return_array = false;
 
 static SV* get_field_value(DATA_CONTAINER_HANDLE hcont, RFC_FIELD_DESC fieldDesc);
 void set_field_value(DATA_CONTAINER_HANDLE hcont, RFC_FIELD_DESC fieldDesc, SV* sv_value);
@@ -1586,6 +1588,7 @@ SV * get_table_line(RFC_STRUCTURE_HANDLE line){
     RFC_FIELD_DESC fieldDesc;
     unsigned fieldCount, i;
     HV* hv_val;
+    AV* av_val;
 
     typeHandle = RfcDescribeType(line, &errorInfo);
     if (typeHandle == NULL) {
@@ -1603,7 +1606,13 @@ SV * get_table_line(RFC_STRUCTURE_HANDLE line){
                                         sv_pv(u16to8(errorInfo.message)));
     }
 
-    hv_val = newHV();
+    if (flag_global_return_array == true) {
+        av_val = newAV();
+    }
+    else {
+        hv_val = newHV();
+    }
+
     for (i = 0; i < fieldCount; i++) {
         rc = RfcGetFieldDescByIndex(typeHandle, i, &fieldDesc, &errorInfo);
         if (rc != RFC_OK) {
@@ -1614,10 +1623,21 @@ SV * get_table_line(RFC_STRUCTURE_HANDLE line){
         }
 
         /* process each field type ...*/
-        hv_store_ent(hv_val, sv_2mortal(u16to8(fieldDesc.name)), sv_2mortal(SvREFCNT_inc(get_field_value(line, fieldDesc))), 0);
+        if (flag_global_return_array == true) {
+            av_push(av_val, sv_2mortal(SvREFCNT_inc(get_field_value(line, fieldDesc))));
+        }
+        else {
+            hv_store_ent(hv_val, sv_2mortal(u16to8(fieldDesc.name)), sv_2mortal(SvREFCNT_inc(get_field_value(line, fieldDesc))), 0);
+        }
     }
 
-    return newRV_noinc((SV*)sv_2mortal(SvREFCNT_inc(hv_val)));
+
+    if (flag_global_return_array == true) {
+        return newRV_noinc((SV*)av_val);
+    }
+    else {
+        return newRV_noinc((SV*)sv_2mortal(SvREFCNT_inc(hv_val)));
+    }
 }
 
 
@@ -2797,7 +2817,7 @@ SV* SAPNWRFC_install(SV* sv_self, SV* sv_sysid){
 
 
 /* Create a Function Module handle to be used for an RFC call */
-SV * SAPNWRFC_invoke(SV* sv_func_call){
+SV * SAPNWRFC_invoke(SV* sv_func_call, SV* sv_return_array){
 
     SAPNW_CONN_INFO *cptr;
     SAPNW_FUNC_DESC *dptr;
@@ -2820,6 +2840,13 @@ SV * SAPNWRFC_invoke(SV* sv_func_call){
     SV* sv_value;
     AV* av_value;
     SV* sv_row;
+
+    if (SvTRUE(sv_return_array)) {
+        flag_global_return_array = true;
+    }
+    else {
+        flag_global_return_array = false;
+    }
 
     h_self =  (HV*)SvRV( sv_func_call );
     if (hv_exists(h_self, (char *) "funccall", 8)) {
@@ -3007,8 +3034,9 @@ SAPNWRFC_set_parameter_active (sv_func_call, sv_name, sv_active)
     SV *    sv_active
 
 SV *
-SAPNWRFC_invoke (sv_func_call)
+SAPNWRFC_invoke (sv_func_call, sv_return_array)
     SV *    sv_func_call
+    SV *    sv_return_array
 
 SV *
 SAPNWRFC_accept (sv_self, sv_wait, sv_global_callback)
