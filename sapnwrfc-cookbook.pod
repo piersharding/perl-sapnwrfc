@@ -109,6 +109,14 @@ A basic example for RFC client connect is:
 
 The parameter debug is an added one to trigger debugging messages in sapnwrfc.
 
+The sapnwrfc.ini file location (directory) can be specified by adding the parameter:
+
+  ini: /path/to/sapnwrfc.ini/directory
+
+Where the value is the directory containing the sapnwrfc.ini file (not th file itself)
+
+Alternatively, you can set the environment variable RFC_INI, and loading this will be attempted.
+
 B<Using SAP SSO>
 
 To connect using SAP SSO, you can specify the ticket in Base64 encoded form,

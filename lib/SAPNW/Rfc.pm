@@ -10,11 +10,12 @@ use strict;
 use SAPNW::Base;
 use base qw(SAPNW::Base);
 use Data::Dumper;
+use Env qw($RFC_INI);
 
 require 5.008;
 
 use vars qw(@ISA $VERSION $SAPNW_RFC_CONFIG);
-$VERSION = '0.37';
+$VERSION = '0.38';
 @ISA = qw(SAPNW::Base);
 
 use YAML;
@@ -55,11 +56,25 @@ sub rfc_connect {
     my $proto = shift;
     my $class = ref($proto) || $proto;
     my @rest = @_;
-  
+
     my $config = { (map { $_ => "$SAPNW_RFC_CONFIG->{$_}" } (grep {$_ !~ /tpname|gwhost|gwserv/i } (keys %$SAPNW_RFC_CONFIG))), @rest };
     map {$config->{$_} = "$config->{$_}"} keys %$config;
     if (exists $config->{debug}) {
         $SAPNW::Base::DEBUG = $config->{debug};
+    }
+    if (exists $config->{ini}) {
+        if (-f $config->{ini}."/sapnwrfc.ini") {
+            SAPNW::Connection::load_ini($config->{ini});
+            debug("Using YAML ini, sapnwrfc.ini file loaded from: ".$config->{ini});
+        }
+        else {
+            die "sapnwrfc.ini file does not exist in directory: $config->{ini}\n";
+        }
+        delete $config->{ini};
+    }
+    else if ($RFC_INI) {
+        SAPNW::Connection::load_ini($RFC_INI);
+        debug("Using RFC_INI, sapnwrfc.ini file loaded from: ".$RFC_INI);
     }
     debug("config passed on: ".Dumper($config));
     my $conn = new SAPNW::Connection(%{$config});
@@ -73,7 +88,7 @@ sub rfc_register {
     my $proto = shift;
     my $class = ref($proto) || $proto;
     my @rest = @_;
-  
+
     my $config = { (map { $_ => $SAPNW_RFC_CONFIG->{$_} } (grep {$_ =~ /tpname|gwhost|gwserv|debug|trace/i } (keys %$SAPNW_RFC_CONFIG))), @rest };
     map {$config->{$_} = "$config->{$_}"} keys %$config;
     if (exists $config->{debug}) {

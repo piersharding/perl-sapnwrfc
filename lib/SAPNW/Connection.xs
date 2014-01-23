@@ -840,6 +840,47 @@ SV* SAPNWRFC_add_parameter(SV* sv_self, SV* sv_parameter){
 }
 
 
+
+/* Load the sapnwrfc.ini file */
+SV * SAPNWRFC_load_ini(SV * sv_ini){
+
+    SAPNW_FUNC_DESC *dptr;
+    RFC_RC rc = RFC_OK;
+    RFC_ERROR_INFO errorInfo;
+    SV * sv_function_def;
+    SV * sv_descriptor;
+    HV* h_func_def;
+    HV* h_parameters;
+    SAP_UC * ini;
+    RFC_FUNCTION_DESC_HANDLE func_desc_handle;
+    RFC_ABAP_NAME func_name;
+
+    rc = RfcSetIniPath((ini = u8to16(sv_ini)), &errorInfo);
+    free((char *)ini);
+
+  /* bail on a bad RfcSetIniPath */
+    if (rc != RFC_OK) {
+        croak("(sapnwrfc.ini load)Problem in RfcSetIniPath (%s): %d / %s / %s\n",
+                                        sv_pv(sv_ini),
+                                        errorInfo.code,
+                                        sv_pv(u16to8(errorInfo.key)),
+                                        sv_pv(u16to8(errorInfo.message)));
+    }
+
+    rc = RfcReloadIniFile(&errorInfo);
+  /* bail on a bad RfcReloadIniFile */
+    if (rc != RFC_OK) {
+        croak("(sapnwrfc.ini load)Problem in RfcReloadIniFile (%s): %d / %s / %s\n",
+                                        sv_pv(sv_ini),
+                                        errorInfo.code,
+                                        sv_pv(u16to8(errorInfo.key)),
+                                        sv_pv(u16to8(errorInfo.message)));
+    }
+
+    return newSViv(1);
+}
+
+
 /* Get the Metadata description of a Function Module */
 SV * SAPNWRFC_create_function_descriptor(SV * sv_func){
 
@@ -2992,6 +3033,10 @@ PROTOTYPES: DISABLE
 SV *
 SAPNWRFC_connect (sv_self)
     SV *    sv_self
+
+SV *
+SAPNWRFC_load_ini (sv_ini)
+    SV *    sv_ini
 
 SV *
 SAPNWRFC_disconnect (sv_self)

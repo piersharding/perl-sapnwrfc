@@ -9,7 +9,7 @@ use 5.008;
 =cut
 
 use vars qw($VERSION $AUTOLOAD $DEBUG);
-$VERSION = '0.37';
+$VERSION = '0.38';
 
 use SAPNW::Base;
 $SAPNW::Base::DEBUG = 0;
@@ -107,6 +107,14 @@ Connection parameters can be either passed into SAPNW::Rfc->rfc_connect() as a h
   debug: 1
 
 Note: if you supply your config via the YAML based file, you can override any or all of those parameters at the time a call is made to SAPNW::Rfc->rfc_connect().
+
+The sapnwrfc.ini file location (directory) can be specified by adding the parameter:
+
+  ini: /path/to/sapnwrfc.ini/directory
+
+Where the value is the directory containing the sapnwrfc.ini file (not th file itself)
+
+Alternatively, you can set the environment variable RFC_INI, and loading this will be attempted.
 
 
 =head1 WIN32 Support
