@@ -72,7 +72,7 @@ sub rfc_connect {
         }
         delete $config->{ini};
     }
-    else if ($RFC_INI) {
+    elsif ($RFC_INI) {
         SAPNW::Connection::load_ini($RFC_INI);
         debug("Using RFC_INI, sapnwrfc.ini file loaded from: ".$RFC_INI);
     }
